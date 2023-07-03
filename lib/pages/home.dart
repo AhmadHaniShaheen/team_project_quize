@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-// should to change app luncher icon
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -108,19 +107,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-}
-
-class ChangeIcon extends StatefulWidget {
-  const ChangeIcon({super.key});
-
-  @override
-  State<ChangeIcon> createState() => _ChangeIconState();
-}
-
-class _ChangeIconState extends State<ChangeIcon> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
