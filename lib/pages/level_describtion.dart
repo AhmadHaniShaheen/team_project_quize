@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:team_flutter_project/pages/true_false_q_screen.dart';
+import 'package:team_flutter_project/models/level_info.dart';
 
 import '../constants.dart';
 import '../widgets/my_outline_btn.dart';
 
 class LevelDescription extends StatelessWidget {
-  const LevelDescription({Key? key}) : super(key: key);
+  final Level levelInfo;
+  const LevelDescription({Key? key, required this.levelInfo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var questionNumber = 5;
-    var questionsCount = 10;
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              kBlueBg,
-              kL2,
-            ],
+            colors: levelInfo.colors,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -48,11 +44,11 @@ class LevelDescription extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Center(
-                  child: Image.asset('assets/images/ballon-b.png'),
+                  child: Image.asset(levelInfo.image),
                 ),
               ),
               Text(
-                'question $questionNumber of $questionsCount',
+                levelInfo.supTitle,
                 style: const TextStyle(
                   fontSize: 18,
                   fontFamily: 'Sf-Pro-Text',
@@ -62,34 +58,34 @@ class LevelDescription extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              const Text(
-                'In Which City of Germany Is the Largest Port?',
-                style: TextStyle(
+              Text(
+                levelInfo.title,
+                style: const TextStyle(
                   fontSize: 32,
                   fontFamily: 'Sf-Pro-Text',
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
-                'question  dhjvajak jklfsakljvabvjkfabjsk \n cdklbvcjksabcddhsaj',
-                style: TextStyle(
+              const SizedBox(
+                height: 24,
+              ),
+              Text(
+                levelInfo.description,
+                style: const TextStyle(
                   fontSize: 18,
                   fontFamily: 'Sf-Pro-Text',
                   color: Colors.white60,
                 ),
               ),
-              const Spacer(),
+              const SizedBox(
+                height: 32,
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TrueFalseQuiz(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, levelInfo.routeName);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
