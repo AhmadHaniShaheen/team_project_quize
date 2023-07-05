@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:team_flutter_project/constants.dart';
+import 'package:team_flutter_project/models/level_info.dart';
 import 'package:team_flutter_project/pages/level_describtion.dart';
 import 'package:team_flutter_project/widgets/my_outline_btn.dart';
 import 'dart:developer' as devtool show log;
@@ -15,6 +16,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List levels = [
+    Level(
+      image: 'assets/images/bags.png',
+      supTitle: 'Level 1',
+      title: 'True or False',
+      icon: Icons.check,
+      description:
+          "In this quiz, you will be presented with five true/false questions. Test your knowledge and respond quickly to see how many questions you can answer correctly! ",
+      colors: const [kL1, kL12],
+      routeName: '/true_false_q',
+    ),
+    Level(
+      image: 'assets/images/ballon-s.png',
+      supTitle: 'Level 2',
+      title: 'Multiple Choice',
+      description: 'Hi ya man',
+      icon: Icons.play_arrow,
+      colors: const [kL2, kL22],
+      routeName: '/multiple_q',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,24 +105,37 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const LevelDescription();
+                        return LevelDescription(
+                          levelInfo: levels[0],
+                        );
                       },
                     ),
                   );
                 },
-                icon: Icons.check,
-                title: 'True or False',
-                subtitle: 'Level 1',
-                image: 'assets/images/bags.png',
-                colors: const [kL1, kL12],
+                icon: levels[0].icon,
+                title: levels[0].title,
+                subtitle: levels[0].supTitle,
+                image: levels[0].image,
+                colors: levels[0].colors,
               ),
               MyLevelWidget(
-                function: () {},
-                icon: Icons.play_arrow,
-                title: 'Multiple Choice',
-                subtitle: 'Level 2',
-                image: 'assets/images/ballon-s.png',
-                colors: const [kL2, kL22],
+                function: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LevelDescription(
+                          levelInfo: levels[0],
+                        );
+                      },
+                    ),
+                  );
+                },
+                icon: levels[1].icon,
+                title: levels[1].title,
+                subtitle: levels[1].supTitle,
+                image: levels[1].image,
+                colors: levels[1].colors,
               ),
             ],
           ),
