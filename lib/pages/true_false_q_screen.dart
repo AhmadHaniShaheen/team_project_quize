@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:team_flutter_project/models/true_false/quiz_brain.dart';
 
 import '../constants.dart';
@@ -30,6 +31,9 @@ class _TrueFalseQuizState extends State<TrueFalseQuiz> {
     bool correctAnswer = quizBrain.getQuestionAnswer();
     setState(() {
       if (correctAnswer == userChoice) {
+        setState(() {
+          counter = 10;
+        });
         scoreKeeper.add(
           const Icon(
             Icons.check,
@@ -37,6 +41,9 @@ class _TrueFalseQuizState extends State<TrueFalseQuiz> {
           ),
         );
       } else {
+        setState(() {
+          counter = 10;
+        });
         scoreKeeper.add(
           const Icon(
             Icons.close,
@@ -48,12 +55,12 @@ class _TrueFalseQuizState extends State<TrueFalseQuiz> {
 
     if (quizBrain.isFinished()) {
       devtool.log('finished');
-
       Timer(const Duration(seconds: 1), () {
-        // Alert(context: context, title: "Finished", desc: "you are done").show();
+        Alert(context: context, title: "Finished", desc: "you are done").show();
         setState(() {
           quizBrain.reset();
           scoreKeeper.clear();
+          counter = 10;
         });
       });
     } else {
@@ -67,11 +74,25 @@ class _TrueFalseQuizState extends State<TrueFalseQuiz> {
       setState(() {
         counter--;
       });
-      if (counter == 0) {
-        // timer.cancel();
+      if (counter == 0 && !quizBrain.isFinished()) {
+        scoreKeeper.add(
+          const Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+        );
         counter = 10;
         quizBrain.nextQuestion();
       }
+      if (counter == 0 && quizBrain.isFinished()) {
+        Timer(const Duration(seconds: 1), () {
+          setState(() {
+            quizBrain.reset();
+            scoreKeeper.clear();
+            counter = 10;
+          });
+        });
+      } else {}
     });
     super.initState();
   }

@@ -16,6 +16,7 @@ class _MultiQScreenState extends State<MultiQScreen> {
   Widget build(BuildContext context) {
     var questionNumber = 5;
     var questionsCount = 10;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

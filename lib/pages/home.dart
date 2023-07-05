@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return LevelDescription(
-                          levelInfo: levels[0],
+                          levelInfo: levels[1],
                         );
                       },
                     ),
